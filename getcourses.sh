@@ -12,12 +12,12 @@ function cshapi {
 }
 
 JSON=$(cshapi "" getSchoolsForTerm)
-SCHOOLS=$(jq -r '.[].id' <(echo $JSON))
+SCHOOLS=$(jq -r '.[].id' <<<$JSON)
 
 for SCHOOL in $SCHOOLS
 do
 	JSON=$(cshapi "school=$SCHOOL" getDepartments)
-	DEPTS="${DEPTS} $(jq -r '.departments [].id' <(echo $JSON))"
+	DEPTS="${DEPTS} $(jq -r '.departments [].id' <<<$JSON)"
 done
 
 for DEPT in $DEPTS
