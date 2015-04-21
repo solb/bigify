@@ -23,7 +23,7 @@ done
 for DEPT in $DEPTS
 do
 	JSON=$(cshapi "department=$DEPT" getCourses)
-	COURSES="$(jq -r '.courses [].title' <(echo $JSON))"
+	COURSES="$(jq -r '.courses [].title' <<<$JSON)"
 	for COURSE in "$COURSES"
 	do
 		echo "$COURSE" >> "$FILE"
